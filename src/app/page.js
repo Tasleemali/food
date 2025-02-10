@@ -63,21 +63,22 @@ export default function Home() {
        
        
        <CardContent onClick={() => router.push(``)}>
-       
-         <div className="grid w-full items-center  ">
-       
-           <div className="flex flex-col space-y-1.5">
-       
-             <Image className="w-[100px]  sm:w-[150px] md:w-[300px]" src={item.image} />
-             <p className=''>{item.name}</p>
-       
-             <CardDescription className='h-10 w-[100px]  sm:w-[150px] md:w-[300px]" overflow-hidden overflow-x-hidden'>{item.description}</CardDescription>
-       
-       
-             <p > <span className="text-red-500" >${item.price}</span></p>
-       
-           </div>
-         </div>
+      
+  <div className="grid w-full items-center  ">
+
+    <div className="flex flex-col space-y-1.5">
+
+      <Image className="w-[100px]  sm:w-[150px] md:w-[300px]" src={item.image} alt='not' />
+      <p className=''>{item.name}</p>
+
+      <CardDescription className='h-10 w-[100px]  sm:w-[150px] md:w-[300px]" overflow-hidden overflow-x-hidden'>{item.description}</CardDescription>
+
+
+      <p > <span className="text-red-500" >${item.price}</span></p>
+
+    </div>
+  </div>
+
 
           <Button  className='bg-green-500 w-full' onClick={()=>{ addcart(item )  ,router.push("/service/cart")}} >
           Add Cart
