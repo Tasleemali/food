@@ -51,14 +51,14 @@ export default function Home() {
           </div>
           {/* items */}
           <h1 className=" mx-5 pt-5 font-serif text-left md:text-3xl  ">Top Dishes Near You</h1>
-          <div className=" px-5  grid grid-cols-2 gap-2 items-start lg:grid-cols-4 lg:gap-8 place-items-center py-8 ">
+          <div className=" mx-2 pt-2 grid place-items-center grid-cols-2 md:grid-cols-3 lg:grid-cols-4  items-start gap-2 space-y-5 ">
 
 
 
             {food_list.filter((food) => food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item) => {
 
               return (
-                <div key={item.id} className=" mt-2 pt-2 h-[300px] md:h-[400px]   border-2 border-gray-100 rounded-md shadow-lg"   >
+                <div key={item.id} className=" mt-2 pt-2 h-[250px] sm:h-[300px]  md:h-[400px]   border-2 border-gray-100 rounded-md shadow-lg"   >
 
 
                   <CardContent >
@@ -68,7 +68,7 @@ export default function Home() {
                       <div className="flex flex-col space-y-1.5">
 
                         <Image className="w-[100px]  sm:w-[150px] md:w-[300px]" src={item.image} alt='not' />
-                        <p className='w-[100px] h-[50px] flex-wrap md:flex  sm:w-[150px] sm:h-[100px] md:w-[300px] md:h-auto"'>{item.name}</p>
+                        <p className="text-xs sm:text-sm md:text-lg" >{item.name}</p>
 
                         <CardDescription className='h-10 w-[100px]  sm:w-[150px] md:w-[300px]" overflow-hidden overflow-x-hidden'>{item.description}</CardDescription>
 
@@ -115,3 +115,4 @@ export default function Home() {
     </div>
   );
 }
+
