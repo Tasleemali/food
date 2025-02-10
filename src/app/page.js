@@ -18,95 +18,100 @@ import AppDownload from "./service/app-download";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const router  = useRouter()
-  const {searchItems, addcart} = useContext(GlobalContext)
+  const router = useRouter()
+  const { searchItems, addcart } = useContext(GlobalContext)
   return (
-  <div className="bg-white w-full">
+    <div className="bg-white w-full">
 
-<motion.div
-            className="flex flex-col space-y-4"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}>
-    <div className="mx-auto max-w-screen-xl grid grid-cols-1 ">
-       <SearchItems/>
-    <div className=" mx-5 pt-5 bg-[url('../utils/frontend_assets/header_img.png')]  h-[500px] bg-cover bg-center rounded-md 
+      <motion.div
+        className="flex flex-col space-y-4"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}>
+        <div className="mx-auto max-w-screen-xl grid grid-cols-1 ">
+          <SearchItems />
+          <div className=" mx-5 pt-5 bg-[url('../utils/frontend_assets/header_img.png')]  h-[500px] bg-cover bg-center rounded-md 
     
     
     " >
-{/* <Image src={header_img}/> */}
-<div className=" pl-10 mt-10 pt-10 text-white" >
+            {/* <Image src={header_img}/> */}
+            <div className=" pl-10 mt-10 pt-10 text-white" >
 
-        <h1 className=" font-bold text-5xl">Order Your
-        Favirote Food</h1>
-        <p className=''>
-          Lorem ipsum dolor sit amet, consectetur <br />
-           adipisicing elit. <br />
-           Maiores quas accusamus, <br />
-           saepe doloribus architecto
-        </p>
-<Button className='bg-amber-50 text-black'>View Menu</Button>
-        </div >
+              <h1 className=" font-bold text-5xl">Order Your
+                Favirote Food</h1>
+              <p className=''>
+                Lorem ipsum dolor sit amet, consectetur <br />
+                adipisicing elit. <br />
+                Maiores quas accusamus, <br />
+                saepe doloribus architecto
+              </p>
+              <Button className='bg-amber-50 text-black'>View Menu</Button>
+            </div >
 
-       </div>
-{/* items */}
-<h1 className=" mx-5 pt-5 font-serif text-left md:text-3xl  ">Top Dishes Near You</h1>
-       <div className=" px-5  grid grid-cols-2 gap-2 items-start lg:grid-cols-4 lg:gap-8 place-items-center py-8 ">
-       
-       
-       
-       {food_list.filter((food)=> food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item) =>
-        { 
-        
-       return(
-       <div key={item.id} className=" mt-2 pt-2 h-[250px] md:h-[300px] lg:h-[350px]  border-2 border-gray-100 rounded-md shadow-lg"  >
-       
-       
-       <CardContent onClick={() => router.push(``)}>
-      
-  <div className="grid w-full items-center  ">
-
-    <div className="flex flex-col space-y-1.5">
-
-      <Image className="w-[100px]  sm:w-[150px] md:w-[300px]" src={item.image} alt='not' />
-      <p className=''>{item.name}</p>
-
-      <CardDescription className='h-10 w-[100px]  sm:w-[150px] md:w-[300px]" overflow-hidden overflow-x-hidden'>{item.description}</CardDescription>
-
-
-      <p > <span className="text-red-500" >${item.price}</span></p>
-
-    </div>
-  </div>
-
-
-          <Button  className='bg-green-500 w-full' onClick={()=>{ addcart(item )  ,router.push("/service/cart")}} >
-          Add Cart
-               </Button>
-       
-       </CardContent>
-       
-       
-       
-       
-       
-       
-       
-       </div>
-       )
-       
-         }
-         
-         
-       )}
-       </div>
-
-          <div className= " mx-5 text-center">
-            <AppDownload/>
           </div>
- 
+          {/* items */}
+          <h1 className=" mx-5 pt-5 font-serif text-left md:text-3xl  ">Top Dishes Near You</h1>
+          <div className=" px-5  grid grid-cols-2 gap-2 items-start lg:grid-cols-4 lg:gap-8 place-items-center py-8 ">
+
+
+
+            {food_list.filter((food) => food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item) => {
+
+              return (
+                <div key={item.id} className=" mt-2 pt-2 h-[300px] md:h-[400px]   border-2 border-gray-100 rounded-md shadow-lg"   >
+
+
+                  <CardContent >
+
+                    <div className="grid w-full items-center  ">
+
+                      <div className="flex flex-col space-y-1.5">
+
+                        <Image className="w-[100px]  sm:w-[150px] md:w-[300px]" src={item.image} alt='not' />
+                        <p className='w-[100px] h-[50px] flex-wrap md:flex  sm:w-[150px] sm:h-[100px] md:w-[300px] md:h-auto"'>{item.name}</p>
+
+                        <CardDescription className='h-10 w-[100px]  sm:w-[150px] md:w-[300px]" overflow-hidden overflow-x-hidden'>{item.description}</CardDescription>
+
+
+                        <p > <span className="text-red-500" >${item.price}</span></p>
+
+                      </div>
+                    </div>
+
+                    {/* 
+       {!cartItems[item._id] ? <Button onClick={()=>{addinstant(item._id),router.push("/service/cart")}}>+</Button>:
+       <div>
+       <Button>-</Button>
+       <p>{cartItems[item._id]}</p>
+         
+         <Button onClick={()=>{addinstant(item._id), router.push("/service/cart")}}>+</Button>
+         </div>} */}
+
+                    <Button className='bg-green-500 w-full' onClick={() => {
+                      addcart(item), toast({
+                        title: "add product ",
+                      }), router.push("/service/cart")
+                    }} >
+                      Add Cart
+                    </Button>
+
+                  </CardContent>
+
+
+                </div>
+              )
+
+            }
+
+            )}
+          </div>
+
+          <div className=" mx-5 text-center">
+            <AppDownload />
+          </div>
+
+        </div>
+      </motion.div>
     </div>
-    </motion.div>
-  </div>
   );
 }
