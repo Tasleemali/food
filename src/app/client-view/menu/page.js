@@ -55,16 +55,15 @@ function Menu() {
           </div>
           {/* foodd list */}
           <h1 className=' pt-6 text-center font-serif text-3xl f '>Our Foods</h1>
-          <div className=" px-5 mt-2 grid grid-cols-2 gap-2 items-start lg:grid-cols-4 lg:gap-8 place-items-center  lg:mt-8">
+          <div className=" mx-2 md:mx-5 grid place-items-center grid-cols-2 md:grid-cols-3  gap-3 space-y-5 ">
 
 
 
             {food_list.filter((food) => food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item, index) => {
               if (foodFilter === 'all' || foodFilter === item.category) {
                 return (
-                  <div key={index} className=" mt-2 pt-2 h-[300px] md:h-[400px]   border-2 border-gray-100 rounded-md shadow-lg"  >
+                  <div key={item.id} className=" mt-2 pt-2 h-[250px] sm:h-[300px]  md:h-[400px]   border-2 border-gray-100 rounded-md shadow-lg"   >
 
-                    {/* onClick={()=>router.push(`/client-view/menu/${item.id}`)}  */}
                     <CardContent >
 
                       <div className="grid w-full items-center  ">
@@ -72,7 +71,7 @@ function Menu() {
                         <div className="flex flex-col space-y-1.5">
 
                           <Image className="w-[100px]  sm:w-[150px] md:w-[300px]" src={item.image} alt='not' />
-                          <p className='w-[100px] h-[50px] flex-wrap md:flex  sm:w-[150px] sm:h-[100px] md:w-[300px] md:h-auto'>{item.name}</p>
+                          <p className="text-xs sm:text-sm md:text-lg" >{item.name}</p>
 
                           <CardDescription className='h-10 w-[100px]  sm:w-[150px] md:w-[300px]" overflow-hidden overflow-x-hidden'>{item.description}</CardDescription>
 
@@ -81,16 +80,6 @@ function Menu() {
 
                         </div>
                       </div>
-
-                      {/* 
-{!cartItems[item._id] ? <Button onClick={()=>{addinstant(item._id),router.push("/service/cart")}}>+</Button>:
-<div>
-<Button>-</Button>
-<p>{cartItems[item._id]}</p>
-  
-  <Button onClick={()=>{addinstant(item._id), router.push("/service/cart")}}>+</Button>
-  </div>} */}
-
                       <Button className='bg-green-500 w-full' onClick={() => {
                         addcart(item), toast({
                           title: "add product ",
@@ -99,28 +88,14 @@ function Menu() {
                         Add Cart
                       </Button>
 
-
-
-
-
                     </CardContent>
-
-
-
-
-
-
 
                   </div>
                 )
 
               }
-
-
             })}
           </div>
-
-
 
         </div>
       </motion.div>
