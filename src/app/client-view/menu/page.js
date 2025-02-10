@@ -73,7 +73,7 @@ return(
     <div className="flex flex-col space-y-1.5">
 
       <Image className="w-[100px]  sm:w-[150px] md:w-[300px]" src={item.image} alt='not' />
-      <p className=''>{item.name}</p>
+      <p className='w-[100px] h-[50px] flex-wrap md:flex  sm:w-[150px] sm:h-[100px] md:w-[300px] md:h-auto"'>{item.name}</p>
 
       <CardDescription className='h-10 w-[100px]  sm:w-[150px] md:w-[300px]" overflow-hidden overflow-x-hidden'>{item.description}</CardDescription>
 
