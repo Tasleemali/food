@@ -55,14 +55,14 @@ function Menu() {
           </div>
           {/* foodd list */}
           <h1 className=' pt-6 text-center font-serif text-3xl f '>Our Foods</h1>
-          <div className=" mx-2 md:mx-5 grid place-items-center grid-cols-2 md:grid-cols-3  gap-3 space-y-5 ">
+          <div className=" pt-5 flex justify-center items-center  flex-wrap gap-5  ">
 
 
 
             {food_list.filter((food) => food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item, index) => {
               if (foodFilter === 'all' || foodFilter === item.category) {
                 return (
-                  <div key={item.id} className=" mt-2 pt-2 h-[250px] sm:h-[300px]  md:h-[400px]   border-2 border-gray-100 rounded-md shadow-lg"   >
+                  <div key={item.id} className="  mt-2 pt-2 h-[300px] w-auto sm:h-[350px]   md:h-[450px]   border-2 border-gray-100 rounded-md  shadow-lg"   >
 
                     <CardContent >
 
@@ -73,14 +73,14 @@ function Menu() {
                           <Image className="w-[100px]  sm:w-[150px] md:w-[300px]" src={item.image} alt='not' />
                           <p className="text-xs sm:text-sm md:text-lg" >{item.name}</p>
 
-                          <CardDescription className='h-10 w-[100px]  sm:w-[150px] md:w-[300px]" overflow-hidden overflow-x-hidden'>{item.description}</CardDescription>
+                          <CardDescription className=' w-[100px]  sm:w-[150px] md:w-[300px] text-xs sm:text-sm md:text-lg overflow-clip'>{item.description}</CardDescription>
 
 
                           <p > <span className="text-red-500" >${item.price}</span></p>
 
                         </div>
                       </div>
-                      <Button className='bg-green-500 w-full' onClick={() => {
+                      <Button className='bg-green-500 w-full mt-5' onClick={() => {
                         addcart(item), toast({
                           title: "add product ",
                         }), router.push("/service/cart")
@@ -92,11 +92,9 @@ function Menu() {
 
                   </div>
                 )
-
               }
             })}
           </div>
-
         </div>
       </motion.div>
     </div>
@@ -104,3 +102,4 @@ function Menu() {
 }
 
 export default Menu
+
