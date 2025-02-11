@@ -51,15 +51,12 @@ export default function Home() {
           </div>
           {/* items */}
           <h1 className=" mx-5 pt-5 font-serif text-left md:text-3xl  ">Top Dishes Near You</h1>
-          <div className=" mx-2 pt-2 grid place-items-center grid-cols-2 md:grid-cols-3 lg:grid-cols-4  items-start gap-2 space-y-5 ">
-
-
+          <div  className="pt-5 flex justify-center items-center  flex-wrap gap-5">
 
             {food_list.filter((food) => food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item) => {
 
               return (
-                <div key={item.id} className=" mt-2 pt-2 h-[250px] sm:h-[300px]  md:h-[400px]   border-2 border-gray-100 rounded-md shadow-lg"   >
-
+                <div key={item.id} className="  mt-2 pt-2 h-[300px] w-auto sm:h-[350px]   md:h-[450px]   border-2 border-gray-100 rounded-md  shadow-lg"    >
 
                   <CardContent >
 
@@ -70,24 +67,12 @@ export default function Home() {
                         <Image className="w-[100px]  sm:w-[150px] md:w-[300px]" src={item.image} alt='not' />
                         <p className="text-xs sm:text-sm md:text-lg" >{item.name}</p>
 
-                        <CardDescription className='h-10 w-[100px]  sm:w-[150px] md:w-[300px]" overflow-hidden overflow-x-hidden'>{item.description}</CardDescription>
-
+                        <CardDescription className=' w-[100px]  sm:w-[150px] md:w-[300px] text-xs sm:text-sm md:text-lg overflow-clip'>{item.description}</CardDescription>
 
                         <p > <span className="text-red-500" >${item.price}</span></p>
-
                       </div>
                     </div>
-
-                    {/* 
-       {!cartItems[item._id] ? <Button onClick={()=>{addinstant(item._id),router.push("/service/cart")}}>+</Button>:
-       <div>
-       <Button>-</Button>
-       <p>{cartItems[item._id]}</p>
-         
-         <Button onClick={()=>{addinstant(item._id), router.push("/service/cart")}}>+</Button>
-         </div>} */}
-
-                    <Button className='bg-green-500 w-full' onClick={() => {
+                    <Button className='bg-green-500 w-full mt-5' onClick={() => {
                       addcart(item), toast({
                         title: "add product ",
                       }), router.push("/service/cart")
@@ -96,7 +81,6 @@ export default function Home() {
                     </Button>
 
                   </CardContent>
-
 
                 </div>
               )
