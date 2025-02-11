@@ -76,7 +76,7 @@ function Navbar() {
           {isAuthUser ? (
             <button  onClick={()=>router.push("/service/account")} className={
               "mt-1.5 flex flex-col justify-center items-center  px-5 py-3 text-xs font-medium upprcase tracking-wide "
-            } > <User className='md:w-10 md:h-10' />Account  </button>) : <Link href="/service/login"> <button className={
+            } > <User className='md:w-10 md:h-10 hover:bg-gray-200 cursor-pointer' />Account  </button>) : <Link href="/service/login"> <button className={
               "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
             }>Login</button></Link>}
           {/* navbar logo */}
