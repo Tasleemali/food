@@ -51,8 +51,7 @@ export default function Home() {
                           <p className='text-gray-400 text-sm px-2'>{item.description}</p>
                           <p className='text-sm px-2'><span className='text-green-500'>$</span>{item.price}</p>
                          </div>
-                    <div className='px-2 py-3'>
-                    <div className='px-2 py-3'>
+                       <div className='px-2 py-3'>
                       <Button className=' text-xs bg-slate bg-green-500 ext-white w-full font-semibold '
                         onClick={() => { addcart(item), router.push("/service/cart") }} >
                         ADD CART
