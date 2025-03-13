@@ -22,7 +22,7 @@ function Navitem({ menu, setMenu, router, isAuthUser }) {
         <ul className=' flex flex-col justify-center items-center  gap-10 md:hidden '    >
            {isAuthUser ? <Fragment>
            <li  className={`${menuActive === 'cart'? 'border-b-2 border-orange-500' :""}`} value={'cart'} onClick={() => {router.push('/service/cart') ,setMenu(!menu) ,setMenuActive('cart'),setMenu(!menu)}} >Cart</li>
-           <li className={`${menuActive === 'home'? 'border-b-2 border-orange-500' :""}`}  onClick={logoutbtn}>Logout</li>
+          
 
                           </Fragment> : null}
          </ul>
