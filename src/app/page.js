@@ -46,11 +46,12 @@ export default function Home() {
                 <div className='  w-full h-auto max-w-sm '>
                   <div className='  w-full aspect-[4/4]  bg-white relative'>
                     <Image className='w-full h-auto' src={item.image} />
-                    <div className=' mt-2  text-start'>
+                   <div className=' mt-2  text-start'>
                           <h1 className='text-sm px-2'>{item.name}</h1>
                           <p className='text-gray-400 text-sm px-2'>{item.description}</p>
                           <p className='text-sm px-2'><span className='text-green-500'>$</span>{item.price}</p>
                          </div>
+                    <div className='px-2 py-3'>
                     <div className='px-2 py-3'>
                       <Button className=' text-xs bg-slate bg-green-500 ext-white w-full font-semibold '
                         onClick={() => { addcart(item), router.push("/service/cart") }} >
