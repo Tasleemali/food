@@ -1,130 +1,89 @@
 "use client"
-import React, { Fragment, useContext, useState } from 'react'
+import React, { useContext, } from 'react'
 import { menu_list } from '@/utils'
 import Image from 'next/image'
 import { food_list } from '@/utils'
-import SearchItems from '@/components/all-components/search'
 import { motion } from 'framer-motion'
-
-import {
-
-  CardContent,
-  CardDescription,
-
-} from "@/components/ui/card"
 import { GlobalContext } from '@/context'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { Minus, Plus } from 'lucide-react'
-import { useToast } from '@/hooks/use-toast'
-
+import SearchItems from '@/components/all-components/search'
 function Menu() {
-
-   const  {toast} = useToast()
-
   const router = useRouter()
-const {foodFilter ,setFoodFilter} = useContext(GlobalContext)
-const {searchItems ,setSearchItems} = useContext(GlobalContext)
-const { addcart } = useContext(GlobalContext)
-
-
-
-
+  const { foodFilter, setFoodFilter } = useContext(GlobalContext)
+  const { searchItems, setSearchItems } = useContext(GlobalContext)
+  const { addcart } = useContext(GlobalContext)
   return (
-    <div className='bg-white py-4 w-full'>
+    <div className='bg-white text-black w-full'>
 
-<motion.div
-            className="flex flex-col space-y-4"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}>
+      <motion.div
+        className="flex flex-col space-y-4"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}>
 
-<div className=' mx-auto max-w-screen-xl   '>
-  
-  <SearchItems/>
+        <div className=' max-w-screen-2xl px-4 md:px-10 '>
+          {/* search items */}
+          <div className='mt-3'>
+            <SearchItems />
+          </div>
+          {/* menu list */}
+          <div className="w-full ">
+            <div className="flex space-x-8 p-4 overflow-x-auto no-scrollbar md:overflow-x-visible justify-around">
+              {menu_list.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => setFoodFilter(prev => prev === item.menu_name ? 'all' : item.menu_name)}
+                  className={`flex flex-col items-center cursor-pointer transition `} >
+                  <div className="w-10 h-10 md:w-20 md:h-20 rounded-full overflow-hidden">
+                    <Image src={item.menu_image} alt={item.menu_name}   className={` ${foodFilter === item.menu_name ? "border-2 border-red-500 rounded-full p-1" : ""
+                      }w-full h-full object-cover`} />
+                  </div>
+                  <p className="text-sm mt-2">{item.menu_name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-<div className=' mx-auto  flex flex-wrap  justify-center items-center gap-10 md:gap-20  '>
-{menu_list.map(item => <div onClick={()=>setFoodFilter(prev=> prev === item.menu_name? 'all':item.menu_name)} className=' flex flex-col  justify-center items-center cursor-pointer  '>
-     <Image className={`${foodFilter === item.menu_name?"border-2 border-red-500 rounded-[50%]":  ''}  w-[50px] md:w-[100]  h-auto`}  src={item.menu_image}/>
-   <p>{item.menu_name}</p>
+          {/* food list */}
+          <div className='mt-5 pt-5  grid grid-cols-2 md:grid-cols-4 gap-3 py-10 '>
+            {food_list.filter((food) => food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item, index) => {
+              if (foodFilter === 'all' || foodFilter === item.category) {
+                return (
+                  <div className='mx-3  shadow-sm shadow-slate-300 '>
+                    <div className='  w-full h-auto max-w-sm '>
+                      <div className='  w-full aspect-[4/4]  bg-white relative'>
+                        <Image className='w-full h-auto' src={item.image} alt={item.menu_name} />
+                        <div className=' mt-2  text-start'>
+                          <h1 className='text-sm px-2'>{item.name}</h1>
+                          <p className='text-gray-400 text-sm px-2'>{item.description}</p>
+                          <p className='text-sm px-2'><span className='text-green-500'>$</span>{item.price}</p>
+                         </div>
+                        <div className='px-2 py-3'>
+                          <Button className=' text-xs bg-slate bg-green-500 ext-white w-full font-semibold '
+                            onClick={() => { addcart(item), router.push("/service/cart") }} >
+                            ADD CART
+                          </Button>
+                        
+                        </div>
 
+                      </div>
 
-</div>)}
+                    </div>
+                  </div>
+                )
+              }
+            })}
 
+          </div>
 
-</div>
-{/* foodd list */}
-<h1 className=' pt-6 text-center font-serif text-3xl f '>Our Foods</h1>
-<div className=" px-5 mt-2 grid grid-cols-2 gap-2 items-start lg:grid-cols-4 lg:gap-8 place-items-center  lg:mt-8">
+        </div>
 
-
-
-{food_list.filter((food)=> food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item , index) =>
- { 
-  if(foodFilter === 'all'  || foodFilter === item.category ){
-return(
-<div   key={index}   className=" mt-2 pt-2 h-[300px] md:h-[400px]   border-2 border-gray-100 rounded-md shadow-lg"  >
-
-{/* onClick={()=>router.push(`/client-view/menu/${item.id}`)}  */}
-<CardContent >
-
-  <div className="grid w-full items-center  ">
-
-    <div className="flex flex-col space-y-1.5">
-
-      <Image className="w-[100px]  sm:w-[150px] md:w-[300px]" src={item.image} alt='not' />
-      <p className=''>{item.name}</p>
-
-      <CardDescription className='h-10 w-[100px]  sm:w-[150px] md:w-[300px]" overflow-hidden overflow-x-hidden'>{item.description}</CardDescription>
-
-
-      <p > <span className="text-red-500" >${item.price}</span></p>
-
-    </div>
-  </div>
-
-{/* 
-{!cartItems[item._id] ? <Button onClick={()=>{addinstant(item._id),router.push("/service/cart")}}>+</Button>:
-<div>
-<Button>-</Button>
-<p>{cartItems[item._id]}</p>
-  
-  <Button onClick={()=>{addinstant(item._id), router.push("/service/cart")}}>+</Button>
-  </div>} */}
-
-  <Button  className='bg-green-500 w-full' onClick={()=>{ addcart(item ) ,toast({
-   title: "add product ",
-  })   ,router.push("/service/cart")}} >
- Add Cart
-      </Button>
-   
-
-
-    
-
-</CardContent>
-
-
-
-
-
-
-
-</div>
-)
-
-  }
-  
-  
-})}
-</div>
-
-
-
-</div>
-</motion.div>
+      </motion.div>
     </div>
   )
 }
 
 export default Menu
+
+

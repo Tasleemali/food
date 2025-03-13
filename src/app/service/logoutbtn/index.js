@@ -13,7 +13,7 @@ async function logoutbtn() {
       const result = await logoutAction()
         if (result?.success) {
           alert('logout succesful')
-          router.push('service/login')
+          router.push('/service/login')
         }
 }
 

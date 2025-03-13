@@ -13,29 +13,27 @@ const router = useRouter()
  const [signUpData ,setSingnUpData] = useState(intialSignup)
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
-  
-
    console.log(signUpData)
 
-  async function handleSubmit(e){
+ async function handleSubmit(e){
+   let isValid = true
+ if (isValid) {
+  setLoading(true)
+  
+}
  const result = await SinupAction(signUpData)
+ 
  console.log(result)
  if(result?.success){
-      router.push("/service/login")
+  setTimeout(() => {
+    setLoading(false)
+    router.push("/service/login")
+    alert('signup successful!')
+  }, 2000)
+    
  }
 
-    e.preventDefault()
-    let isValid = true
-    
 
-    if (isValid) {
-      setLoading(true)
-      // Simulate a login request
-      setTimeout(() => {
-        setLoading(false)
-        alert('signup successful!')
-      }, 2000)
-    }
   }
 
   return (
@@ -108,7 +106,7 @@ const router = useRouter()
           
           </div>
           <Button type="submit" disabled={loading} className=" mt-5 w-full">
-            {loading ? 'Loading...' : 'signUp'}
+            {loading ? 'Loading...' : 'SignUp'}
           </Button>
 
           <p className='  py-5 text-sky-500 text-center'> new to seeit? <Link href="/login"><span>SignUp</span></Link> </p>

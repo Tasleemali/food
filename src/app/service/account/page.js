@@ -54,44 +54,7 @@ import LogOut from "../logoutbtn"
               </div>
             </CardContent>
           </Card>
-          {/* <Card>
-            <CardHeader>
-              <CardTitle>Order History</CardTitle>
-              <CardDescription>View your past orders.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {orders.length === 0 ? (
-                <div className="text-center mt-10">
-                  <p className="text-xl font-bold">No Orders Found</p>
-                  <p className="text-gray-500">You haven't placed any orders yet.</p>
-                </div>
-              ) : (
-                orders.map((order) => (
-                  <div key={order.id} className="border-b pb-4 mb-4 last:border-b-0 last:pb-0 last:mb-0">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="text-lg font-bold">Order #{order.id}</p>
-                        <p className="text-gray-500">{order.date}</p>
-                      </div>
-                      <Button variant="outline" size="icon">
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="mt-2">
-                      {order.items.map((item, index) => (
-                        <p key={index} className="text-gray-500">
-                          {item}
-                        </p>
-                      ))}
-                    </div>
-                    <div className="mt-2">
-                      <p className="text-lg font-bold">Total: ${order.total.toFixed(2)}</p>
-                    </div>
-                  </div>
-                ))
-              )}
-            </CardContent>
-          </Card> */}
+          {/* logout */}
          <LogOut/>
         </div>
       </main>
