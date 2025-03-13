@@ -75,7 +75,7 @@ function Navbar() {
 
           {isAuthUser ? (
             <button  onClick={()=>router.push("/service/account")} className={
-              "mt-1.5 flex flex-col justify-center items-center  px-5 py-3 text-xs font-medium upprcase tracking-wide "
+              " flex flex-col justify-center items-center  px-5 py-3 text-xs font-medium upprcase tracking-wide "
             } > <CircleUser className='w-8 h-8' /> </button>) : <Link href="/service/login"> <button className={
               "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
             }>Login</button></Link>}
