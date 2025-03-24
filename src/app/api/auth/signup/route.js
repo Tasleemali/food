@@ -7,7 +7,7 @@ import bcrypt from 'bcryptjs'
 export async function POST(req) {
     try {
         await authDB()
-        const {username ,email ,password ,mobile} =  await req.json()
+        const {username ,email ,password } =  await req.json()
          const existingUser = await User.findOne({email})
     if(existingUser){
         return Response.json({message:'this eamil already exist plz try another email'} , {status:400})
