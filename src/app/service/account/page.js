@@ -1,5 +1,4 @@
-
-
+"use client"
 
 import {
     Card,
@@ -9,18 +8,41 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 
-import { User, Mail, Clock, ArrowRight } from "lucide-react"
-import { getloginUser, logoutAction } from '@/action'
-import { Button } from "@/components/ui/button"
-import LogOut from "../logoutbtn"
+import { User, Mail } from "lucide-react"
+
+import LogOut from "../../../components/all-components/logoutbtn"
+import { useEffect, useState } from "react"
 
 
- async function UserDetailsPage() {
+  function UserDetailsPage() {
+const [user ,setUser] = useState('')
 
-   const user =  await getloginUser()
+
+      useEffect(()=>{
+        const fetchUser = async () => {
+          try {
+            const token = localStorage.getItem("token")
+            if(!token) return
+
+            const res = await fetch("/api/auth/me",{
+              method:"GET",
+              headers: { Authorization: `Bearer ${token}` },
+
+            })
+            const data = await res.json()
+            if(res.ok){
+              setUser(data)
+            }
+              
+          } catch (error) {
+            console.error("Error fetching user:", error);
+          }
+          
+        }
+        fetchUser()
+      },[])
+
    console.log(user)
-
-   
 
   return (
 
@@ -42,14 +64,14 @@ import LogOut from "../logoutbtn"
                 <User className="h-6 w-6" />
                 <div>
                   <p className="text-lg font-bold">Name</p>
-                  <p className="text-gray-500">{user?.data?.username}</p>
+                  <p className="text-gray-500">{user?.username}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <Mail className="h-6 w-6" />
                 <div>
                   <p className="text-lg font-bold">Email</p>
-                  <p className="text-gray-500">{user?.data?.email}</p>
+                  <p className="text-gray-500">{user?.email}</p>
                 </div>
               </div>
             </CardContent>

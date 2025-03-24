@@ -6,8 +6,8 @@ import { motion } from 'framer-motion';
 export default function About() {
   return (
 
-    <div className='bg-white '>
-          <div className='mx-auto max-w-screen-xl mt-5 '>
+    <div className='bg-white text-black  '>
+          <div className='  max-w-screen-2xl py-10 px-5 '>
           <motion.div
             className="flex flex-col space-y-4"
             initial={{ opacity: 0, y: 50 }}
@@ -16,18 +16,18 @@ export default function About() {
       
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative py-20 text-black">
+      <section className="relative pt-5  text-black">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">About Foodie.</h1>
-          <p className="text-xl md:text-2xl mb-8">Delivering Happiness, One Meal at a Time</p>
+          <h1 className="text-2xl md:text-3xl font-bold mb-6">About Foodie.</h1>
+          <p className="text-xl md:text-2xl text-gray-700 mb-8">Delivering Happiness, One Meal at a Time</p>
         </div>
       </section>
 
       {/* Our Story */}
-      <section className="py-16">
+      <section className="py-5">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="md:w-1/2">
+            <div className=" max-w-sm md:w-1/2">
               <img
                 src='https://media.istockphoto.com/id/511243463/photo/work-surface-and-kitchen-equipment.jpg?s=612x612&w=0&k=20&c=DMmmWGnL-m0qxuT7uhoIHvLZuaIp_5ZdjkRC5WICmuU='
                 alt="Our Kitchen"
@@ -75,10 +75,10 @@ export default function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16">
+      <section className="py-5">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Meet the Team</h2>
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-rows-1 gap-8">
             {/* Repeat this block for each team member */}
             <div className="text-center">
               <img

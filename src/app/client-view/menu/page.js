@@ -50,10 +50,10 @@ function Menu() {
             {food_list.filter((food) => food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item, index) => {
               if (foodFilter === 'all' || foodFilter === item.category) {
                 return (
-                  <div className='mx-3  shadow-sm shadow-slate-300 '>
+                  <div key={index} className='mx-3  shadow-sm shadow-slate-300 '>
                     <div className='  w-full h-auto max-w-sm '>
-                      <div className='  w-full aspect-[4/4]  bg-white relative'>
-                        <Image className='w-full h-auto' src={item.image} alt={item.menu_name} />
+                      <div  onClick={()=> router.push(`/client-view/menu/${item._id}`)} className='  w-full aspect-[4/4]  bg-white relative'>
+                        <Image className='w-full h-auto' src={item.image} alt={item.name} />
                         <div className=' mt-2  text-start'>
                           <h1 className='text-sm px-2'>{item.name}</h1>
                           <p className='text-gray-400 text-sm px-2'>{item.description}</p>

@@ -1,95 +1,110 @@
-"use client"
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Eye, EyeOff } from "lucide-react"
-import Link from 'next/link'
-import { intialSignup } from '@/utils'
-import { SinupAction } from '@/action'
-import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-export default function SignUpPage() {
-const router = useRouter()
- const [signUpData ,setSingnUpData] = useState(intialSignup)
-  const [showPassword, setShowPassword] = useState(false)
-  const [loading, setLoading] = useState(false)
-   console.log(signUpData)
+'use client';
 
- async function handleSubmit(e){
-   let isValid = true
- if (isValid) {
-  setLoading(true)
-  
+
+
+import { useContext, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { Eye  ,EyeOff } from 'lucide-react';
+
+import { motion } from 'framer-motion';
+
+const IntialSignUpForm = {
+  username:'',
+  email:'',
+  password:'',
+  mobile: ""
 }
- const result = await SinupAction(signUpData)
- 
- console.log(result)
- if(result?.success){
-  setTimeout(() => {
+export default function SignUpPage() {
+
+const [signUpFormData ,setSignUpFormData] =useState(IntialSignUpForm)
+console.log(signUpFormData)
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter();
+
+
+  const handleSubmit = async (e) => {
+    setLoading(true)
+    e.preventDefault();
+    const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        body: JSON.stringify(signUpFormData),
+        headers: { "Content-Type": "application/json" },
+    });
+
+    const data = await res.json();
+  if (res.ok) {
     setLoading(false)
-    router.push("/service/login")
-    alert('signup successful!')
-  }, 2000)
-    
- }
-
-
+      alert("Signup successful! Please login.");
+      setSignUpFormData(IntialSignUpForm)
+      router.push("/service/login");
+      
+  } else {
+      alert(data.error);
+      setLoading(false);
+      setSignUpFormData(IntialSignUpForm)
   }
+};
+
 
   return (
+    <div className='bg-white text-black'>
 
-    <div className='bg-white'>
+    
+    <div className='mx-auto max-w-screen-2xl px-5 '>
 
-   <div className=' mx-auto max-w-screen-xl w-full'>
-
-  
-    <div className="  mx-5 flex flex-col min-h-[600px] items-center justify-center bg-white">
-      <div className=" w-full max-w-sm p-6 space-y-4 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center">SignUp</h2>
-
+   
+    <div className="flex items-center justify-center min-h-[600px] bg-white">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h2 className="text-2xl font-bold text-center mb-6 text-black">SignUp</h2>
+        
         <motion.div
             className="flex flex-col space-y-4"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}>
-        <form action={handleSubmit}>
-
-        <div className="space-y-2">
-            <label htmlFor="username">Username</label>
-            <Input
-              id="username"
-              type="text"
-            value={signUpData.username}
-            onChange={(e)=>setSingnUpData({...signUpData , username:e.target.value})}
-              placeholder="Enter your username"
-
-            
+        <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+            <label className="block text-gray-700">Username</label>
+            <input
+              type="test"
+              value={signUpFormData.username}
+              onChange={(e) => setSignUpFormData({...signUpFormData, username:e.target.value})}
+              className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
-            
           </div>
-
-
-          <div className="space-y-2">
-            <label htmlFor="email">Email</label>
-            <Input
-              id="email"
+          <div>
+            <label className="block text-gray-700">Email</label>
+            <input
               type="email"
-              value={signUpData.email}
-            onChange={(e)=>setSingnUpData({...signUpData , email:e.target.value})}
-              placeholder="Enter your email"
-              
+              value={signUpFormData.email}
+              onChange={(e) => setSignUpFormData({...signUpFormData, email:e.target.value})}
+              className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
-           
           </div>
-          <div className="space-y-2">
-            <label htmlFor="password">Password</label>
+          <div>
+            <label className="block text-gray-700">Email</label>
+            <input
+              type="tel"
+              value={signUpFormData.number}
+              onChange={(e) => setSignUpFormData({...signUpFormData, mobile:e.target.value})}
+              className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Password</label>
             <div className="relative">
-              <Input
-                id="password"
+              <input
+            
                 type={showPassword ? 'text' : 'password'}
-                value={signUpData.password}
-                onChange={(e)=>setSingnUpData({...signUpData , password:e.target.value})}
-                placeholder="Enter your password"
+                value={signUpFormData.password}
+                onChange={(e)=>setSignUpFormData({...signUpFormData , password:e.target.value})}
+                className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
                
               />
               <button
@@ -103,18 +118,29 @@ const router = useRouter()
             
 
             </div>
-          
           </div>
-          <Button type="submit" disabled={loading} className=" mt-5 w-full">
-            {loading ? 'Loading...' : 'SignUp'}
-          </Button>
-
-          <p className='  py-5 text-sky-500 text-center'> new to seeit? <Link href="/login"><span>SignUp</span></Link> </p>
+          <button
+            type="submit"
+            className="w-full bg-slate-900 text-white py-2 rounded hover:bg-black transition disabled:opacity-50"
+            disabled={loading}
+          >
+            {loading ? 'Signing up...' : 'Sign Up'}
+          </button>
         </form>
+        
+        <p className="text-center text-sm text-gray-600 mt-4">
+        Already have an account? <a href="/service/login" className="text-blue-500 hover:underline">Login</a> <br/>
+        </p>
+       
         </motion.div>
       </div>
+      
+     
+      
+
+    </div>
+   
     </div>
     </div>
-    </div>
-  )
+  );
 }

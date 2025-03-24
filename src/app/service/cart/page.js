@@ -1,5 +1,4 @@
 "use client"
-
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -13,34 +12,24 @@ import { Minus, Plus, RemoveFormatting } from "lucide-react"
 import { useContext } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-
-
+import Link from 'next/link'
 export default function CartPage() {
   const router = useRouter()
   const { cartItems, setCartItems, addcart, reversecart, removecart, isAuthUser } = useContext(GlobalContext)
   console.log(cartItems)
-
   const calculateTotalPrice = () => {
     return cartItems.reduce((total, item) => total + item.qty * item.price, 0).toFixed(2)
   }
 
   return (
-
     <div className='bg-white'>
       <div className='mx-auto max-w-screen-xl px-5 '>
-
-
-        <div className="flex flex-col min-h-screen bg-white">
+        <div className="flex flex-col  bg-white">
           <header className="px-4 lg:px-6 h-14 flex items-center border-b">
             <h1 className="text-2xl font-bold">Your Cart</h1>
           </header>
           <main className="flex-1 p-4 lg:p-6">
-            {!cartItems ? (
-              <div className="text-center mt-10">
-                <p className="text-xl font-bold">Your cart is empty</p>
-                <p className="text-gray-500">Add some items to your cart to get started.</p>
-              </div>
-            ) : (
+            {cartItems.length > 0 ? (
               <div className="space-y-4">
                 {cartItems.map((item) => (
                   <Card key={item.id} className="p-4">
@@ -75,27 +64,20 @@ export default function CartPage() {
                     <p className="text-2xl font-bold">${calculateTotalPrice()}</p>
                   </div>
                 </div>
+                <div className=' w-full'>
+                  {cartItems.length > 0 ? (isAuthUser ? <Button onClick={() => router.push('/checkout')}>CheckOut</Button> : <Link href="/service/login"><Button>login to checkout</Button> </Link>) :
+                    null
+                  }
+                </div>
+              </div>
+            ) : (
+              <div className="text-center mt-10">
+                <p className="text-xl font-bold">Your cart is empty</p>
+                <p className="text-gray-500">Add some items to your cart to get started.</p>
+                <Link href='/'><button className='mt-4 w-[200px] bg-black text-white py-1'>Shop Now</button></Link>
               </div>
             )}
-
-
           </main>
-
-          {isAuthUser ? <Button onClick={() => router.push('/checkout')}>CheckOut</Button> :
-            <Button onClick={() => router.push('/service/login')}>login to go cart</Button>
-
-          }
-          <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 lg:px-6 border-t">
-            <p className="text-xs text-gray-500">© 2023 Foodie Website. All rights reserved.</p>
-            <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-              <a className="text-xs hover:underline underline-offset-4" href="#">
-                Terms of Service
-              </a>
-              <a className="text-xs hover:underline underline-offset-4" href="#">
-                Privacy
-              </a>
-            </nav>
-          </footer>
         </div>
       </div>
     </div>

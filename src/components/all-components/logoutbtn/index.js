@@ -7,20 +7,18 @@ import { useRouter } from 'next/navigation'
 import React, { useContext } from 'react'
 
 function LogOut() {
-    const {isAuthUser} = useContext(GlobalContext)
+    const {isAuthUser ,setIsAuthUser} = useContext(GlobalContext)
     const router = useRouter()
-async function logoutbtn() {
-      const result = await logoutAction()
-        if (result?.success) {
-          alert('logout succesful')
-          router.push('/service/login')
-        }
-}
+    const logout = () => {
+      localStorage.removeItem("token"); // Remove JWT token
+      router.push("/service/login"); // Redirect to login page
+      setIsAuthUser(false)
+    }
 
   return (
     <div>
         {isAuthUser?
- <Button onClick={logoutbtn}>LogOut</Button>:null
+ <Button onClick={logout}>LogOut</Button>:null
         }
      
     </div>

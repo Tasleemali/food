@@ -7,7 +7,7 @@ import { GlobalContext } from "@/context";
 import SearchItems from "@/components/all-components/search";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import AppDownload from "./service/app-download";
+import AppDownload from "../components/all-components/app-download";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -42,16 +42,26 @@ export default function Home() {
           <div className='mt-5 pt-5  grid grid-cols-2 md:grid-cols-4 gap-3 '>
             {food_list.filter((food) => food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item, index) =>
 
-              <div className='mx-3  shadow-sm shadow-slate-300 '>
+              <div key={index} className='mx-3  shadow-sm shadow-slate-300 '>
                 <div className='  w-full h-auto max-w-sm '>
+<<<<<<< HEAD
                   <div className='  w-full aspect-[4/4]  bg-white relative'>
                     <Image className='w-full h-auto' src={item.image} />
                    <div className=' mt-2  text-start'>
+=======
+                  <div  onClick={()=> router.push(`/client-view/menu/${item._id}`)}  className='  w-full aspect-[4/4]  bg-white relative'>
+                    <Image className='w-full h-auto' src={item.image} alt={item.name} />
+                    <div className=' mt-2  text-start'>
+>>>>>>> cc674d0 (Added new features)
                           <h1 className='text-sm px-2'>{item.name}</h1>
                           <p className='text-gray-400 text-sm px-2'>{item.description}</p>
                           <p className='text-sm px-2'><span className='text-green-500'>$</span>{item.price}</p>
                          </div>
+<<<<<<< HEAD
                        <div className='px-2 py-3'>
+=======
+                    <div className='px-2 py-3'>
+>>>>>>> cc674d0 (Added new features)
                       <Button className=' text-xs bg-slate bg-green-500 ext-white w-full font-semibold '
                         onClick={() => { addcart(item), router.push("/service/cart") }} >
                         ADD CART

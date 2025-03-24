@@ -11,7 +11,7 @@ function Navitem({ menu, setMenu, router, isAuthUser }) {
      const [menuActive ,setMenuActive] = useState('home')
   return (
     <div className={`${menu ? '' : 'hidden'}  top-0  z-30  items-center justify-between w-full  md:flex  md:w-auto `}>
-      <ul className=" bg-white flex flex-col justify-start items-center gap-10     absolute left-0 z-30 w-full h-lvh  md:h-auto md:relative   md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:flex-row 
+      <ul className=" px-5 pt-10  bg-white flex flex-col justify-start items-start gap-10     absolute left-0 z-30 w-full h-lvh  md:h-auto md:relative   md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:flex-row 
        md:space-x-16 md:mt-0 md:border-0 md:bg-white  cursor-pointer">
 
         <li className={`${menuActive === 'home'? 'border-b-2 border-orange-500' :""}`} value={'home'} onClick={() => { router.push('/'), setMenu(!menu),setMenuActive('home') } } >Home</li>
@@ -64,19 +64,25 @@ function Navbar() {
 
 
             <button className={
-              "mt-1.5 hidden md:flex md:flex-col justify-center items-center px-5 py-3 text-xs font-medium upprcase tracking-wide"
+              " hidden md:flex md:flex-col justify-center items-center px-5 py-3 text-xs font-medium upprcase tracking-wide"
             }><ShoppingCart onClick={()=>{router.push("/service/cart") ,setMenu(!menu)}} className='w-8 h-8' /> </button>
 
             <button onClick={logoutbtn}
               className={
-                "mt-1.5 hidden   bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+                " hidden   bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
               }>Logout</button>
           </Fragment> : null}
 
           {isAuthUser ? (
+<<<<<<< HEAD
             <button  onClick={()=>router.push("/service/account")} className={
               " flex flex-col justify-center items-center  px-5 py-3 text-xs font-medium upprcase tracking-wide "
             } > <CircleUser className='w-8 h-8' /> </button>) : <Link href="/service/login"> <button className={
+=======
+            <button  onClick={()=> { setMenu(false) ,router.push("/service/account")}} className={
+              " flex flex-col justify-center items-center  px-5  font-medium upprcase tracking-wide "
+            } > <CircleUser className='w-8 h-8' /> </button>) : <Link href="/service/login"> <button  onClick={() => setMenu(false)} className={
+>>>>>>> cc674d0 (Added new features)
               "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
             }>Login</button></Link>}
           {/* navbar logo */}

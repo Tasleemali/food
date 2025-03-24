@@ -8,11 +8,7 @@
 
     
 
-    export const intiallogin =
-        {
-           email:'',
-           password:""
-        }
+ 
 
     
 
@@ -314,6 +310,7 @@ export const food_list = [
         Orginalprice: 15 ,
         description: "Food provides essential nutrients for overall health and well-being",
         category: "Pasta"
+        
     }, {
         _id: "27",
         name: "Creamy Pasta",

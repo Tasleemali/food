@@ -27,19 +27,6 @@ const addcart = (item) =>{
 }
 
 
-
-// const addinstant=(itemId)=>{
-//   if(!cartItems[itemId]){
-//     setCartItems((prev)=>({...prev,[itemId]:1}))
-//   }else{
-//     setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
-
-//   } 
-//   return [...prev , [itemId] , prev[itemId] ]
-
-// }
-
-
 const reversecart = (item) =>{
   setCartItems((prev) =>{
     const existitem = prev.find((i) => i._id === item._id)
