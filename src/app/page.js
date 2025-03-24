@@ -40,37 +40,30 @@ export default function Home() {
           {/* items */}
           <h1 className=" mx-5 pt-5 font-serif text-left md:text-3xl  ">Top Dishes Near You</h1>
           <div className='mt-5 pt-5  grid grid-cols-2 md:grid-cols-4 gap-3 '>
-            {food_list.filter((food) => food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item, index) =>
-
-              <div key={index} className='mx-3  shadow-sm shadow-slate-300 '>
-                <div className='  w-full h-auto max-w-sm '>
-<<<<<<< HEAD
-                  <div className='  w-full aspect-[4/4]  bg-white relative'>
-                    <Image className='w-full h-auto' src={item.image} />
-                   <div className=' mt-2  text-start'>
-=======
-                  <div  onClick={()=> router.push(`/client-view/menu/${item._id}`)}  className='  w-full aspect-[4/4]  bg-white relative'>
-                    <Image className='w-full h-auto' src={item.image} alt={item.name} />
-                    <div className=' mt-2  text-start'>
->>>>>>> cc674d0 (Added new features)
-                          <h1 className='text-sm px-2'>{item.name}</h1>
-                          <p className='text-gray-400 text-sm px-2'>{item.description}</p>
-                          <p className='text-sm px-2'><span className='text-green-500'>$</span>{item.price}</p>
-                         </div>
-<<<<<<< HEAD
-                       <div className='px-2 py-3'>
-=======
-                    <div className='px-2 py-3'>
->>>>>>> cc674d0 (Added new features)
-                      <Button className=' text-xs bg-slate bg-green-500 ext-white w-full font-semibold '
-                        onClick={() => { addcart(item), router.push("/service/cart") }} >
-                        ADD CART
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+           {food_list.filter((food) => food.name.toLowerCase().includes(searchItems.toLowerCase())).map((item, index) => 
+                             <div key={index} className='mx-3  shadow-sm shadow-slate-300 '>
+                               <div className='  w-full h-auto max-w-sm '>
+                                 <div  onClick={()=> router.push(`/client-view/menu/${item._id}`)} className='  w-full aspect-[4/4]  bg-white relative'>
+                                   <Image className='w-full h-auto' src={item.image} alt={item.name} />
+                                   <div className=' mt-2  text-start'>
+                                     <h1 className='text-sm px-2'>{item.name}</h1>
+                                     <p className='text-gray-400 text-sm px-2'>{item.description}</p>
+                                     <p className='text-sm px-2'><span className='text-green-500'>$</span>{item.price}</p>
+                                    </div>
+                                   <div className='px-2 py-3'>
+                                     <Button className=' text-xs bg-slate bg-green-500 ext-white w-full font-semibold '
+                                       onClick={() => { addcart(item), router.push("/service/cart") }} >
+                                       ADD CART
+                                     </Button>
+                                   
+                                   </div>
+           
+                                 </div>
+           
+                               </div>
+                             </div>
+                         
+                       )}
           </div>
           <div className=" mx-5 text-center">
             <AppDownload />
