@@ -73,18 +73,11 @@ function Navbar() {
               }>Logout</button>
           </Fragment> : null}
 
-          {isAuthUser ? (
-<<<<<<< HEAD
-            <button  onClick={()=>router.push("/service/account")} className={
-              " flex flex-col justify-center items-center  px-5 py-3 text-xs font-medium upprcase tracking-wide "
-            } > <CircleUser className='w-8 h-8' /> </button>) : <Link href="/service/login"> <button className={
-=======
-            <button  onClick={()=> { setMenu(false) ,router.push("/service/account")}} className={
-              " flex flex-col justify-center items-center  px-5  font-medium upprcase tracking-wide "
-            } > <CircleUser className='w-8 h-8' /> </button>) : <Link href="/service/login"> <button  onClick={() => setMenu(false)} className={
->>>>>>> cc674d0 (Added new features)
-              "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
-            }>Login</button></Link>}
+          {/* {isAuthUser ?  */}
+          {isAuthUser?
+            <button  onClick={()=>{router.push("/service/account") ,setMenu(!menu)}} className=''><CircleUser className='h-8 w-8' /></button>:
+           <Link href="/service/login"><button className=  "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Login</button></Link>}
+         
           {/* navbar logo */}
           <button
             data-collapse-toggle="navbar-sticky"
