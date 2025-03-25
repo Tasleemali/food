@@ -86,16 +86,6 @@ console.log(signUpFormData)
             />
           </div>
           <div>
-            <label className="block text-gray-700">Email</label>
-            <input
-              type="tel"
-              value={signUpFormData.number}
-              onChange={(e) => setSignUpFormData({...signUpFormData, mobile:e.target.value})}
-              className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div>
             <label className="block text-gray-700">Password</label>
             <div className="relative">
               <input
