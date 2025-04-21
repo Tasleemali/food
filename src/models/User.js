@@ -4,9 +4,10 @@ import mongoose from "mongoose";
 const UserSchema = mongoose.Schema({
 username:String,
 email:String,
+address:String ,
 password:String ,
-mobile : Number
+
 })
-const User = mongoose.models.auths || mongoose.model("auths", UserSchema)
+const User = mongoose.models.users || mongoose.model("users", UserSchema)
 
 export default User;

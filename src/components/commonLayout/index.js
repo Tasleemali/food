@@ -11,7 +11,6 @@ function CommonLayOut({children}) {
       <GlobalState>
       <Navbar/>
      
-      
       {children}
       <Footer/>
       </GlobalState>

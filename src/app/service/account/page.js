@@ -1,103 +1,107 @@
 "use client"
+import { useState ,useEffect, useContext } from 'react';
+import React from 'react'
+import Link from 'next/link';
+import { GlobalContext } from '@/context';
+import { Mail, User } from 'lucide-react';
+import LogOut from '@/components/all-components/logoutbtn';
+  function Account() {
+    const {isAuthUser} = useContext(GlobalContext)
+  const [user, setUser] = useState(null);
+  const [loading ,setLoading] = useState(false)
 
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card"
+  useEffect(() => {
+    const fetchUser = async () => {
+      setLoading(true)
+      try {
+        const token = sessionStorage.getItem("token");
+        if (!token) return;
 
-import { User, Mail } from "lucide-react"
+        const res = await fetch("/api/auth/me", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-import LogOut from "../../../components/all-components/logoutbtn"
-import { useEffect, useState } from "react"
-
-
-  function UserDetailsPage() {
-const [user ,setUser] = useState('')
-
-
-      useEffect(()=>{
-        const fetchUser = async () => {
-          try {
-            const token = localStorage.getItem("token")
-            if(!token) return
-
-            const res = await fetch("/api/auth/me",{
-              method:"GET",
-              headers: { Authorization: `Bearer ${token}` },
-
-            })
-            const data = await res.json()
-            if(res.ok){
-              setUser(data)
-            }
-              
-          } catch (error) {
-            console.error("Error fetching user:", error);
-          }
-          
+        if (res.ok) {
+          const data = await res.json();
+          setUser(data);
+          setLoading(false)
         }
-        fetchUser()
-      },[])
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }finally{
+        setLoading(false)
+      }
+    };
 
-   console.log(user)
+    fetchUser();
+  }, []);
 
-  return (
+  if (loading) {
+    return (
+      <div className="bg-white text-black">
+        <div className="mx-auto max-w-screen-xl px-5">
+          <div className="flex flex-col bg-white">
+            {/* Skeleton Header */}
+            <header className="px-4 lg:px-6 h-14 flex items-center border-b">
+              <div className="h-6 w-32 bg-gray-300 rounded animate-pulse"></div>
+            </header>
 
-    <div className='bg-white'>
-<div className='mx-auto max-w-screen-xl px-5 '>
-    <div className="flex flex-col min-h-screen bg-white">
-      <header className="px-4 lg:px-6 h-14 flex items-center border-b">
-        <h1 className="text-2xl font-bold">Your Account Details</h1>
-      </header>
-      <main className="flex-1 p-4 lg:p-6">
-        <div className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Profile Information</CardTitle>
-              <CardDescription>View and update your profile details.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <User className="h-6 w-6" />
-                <div>
-                  <p className="text-lg font-bold">Name</p>
-                  <p className="text-gray-500">{user?.username}</p>
+            {/* Skeleton Content */}
+            <main className="flex-1 p-4 lg:p-6">
+              <div className="space-y-8">
+                {/* Skeleton for Name and Email */}
+                <div className="flex items-center space-x-4 animate-pulse">
+                  <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
+                  <div className="w-32 h-6 bg-gray-300 rounded"></div>
                 </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <Mail className="h-6 w-6" />
-                <div>
-                  <p className="text-lg font-bold">Email</p>
-                  <p className="text-gray-500">{user?.email}</p>
+                <div className="flex items-center space-x-4 animate-pulse">
+                  <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
+                  <div className="w-32 h-6 bg-gray-300 rounded"></div>
                 </div>
+                {/* Skeleton Logout Button */}
+                <div className="h-10 w-32 bg-gray-300 rounded-md animate-pulse"></div>
               </div>
-            </CardContent>
-          </Card>
-          {/* logout */}
-         <LogOut/>
+            </main>
+          </div>
         </div>
-      </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 lg:px-6 border-t">
-       
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <a className="text-xs hover:underline underline-offset-4" href="#">
-            Terms of Service
-          </a>
-          <a className="text-xs hover:underline underline-offset-4" href="#">
-            Privacy
-          </a>
-        </nav>
-      </footer>
+      </div>
+    );
+  }
+  return (
+    <div className='bg-white text-black'>
+    <div className='mx-auto max-w-screen-xl px-5 '>
+      <div className="flex flex-col  bg-white">
+        {isAuthUser ?
+          <div> <header className="px-4 lg:px-6 h-14 flex items-center border-b">
+            <h1 className="text-2xl font-bold">Your Account Details</h1>
+          </header>
+            <main className="flex-1 p-4 lg:p-6">
+              <div className="space-y-8">
+
+                <div className="flex items-center space-x-4">
+                  <User className="h-6 w-6" />
+                  <div>
+                    <p className="text-lg font-bold">Name</p>
+                    <p className="text-gray-500">{user?.username}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <Mail className="h-6 w-6" />
+                  <div>
+                    <p className="text-lg font-bold">Email</p>
+                    <p className="text-gray-500">{user?.email}</p>
+                  </div>
+                
+                </div>
+               
+                <LogOut />
+              </div>
+            </main>  </div> : <div className=" h-[400px] grid place-content-center "> <Link href="/service/login"> <button className=" bg-black text-white px-10 py-3 rounded-md">Get Your Account</button> </Link></div>}
+
+      </div>
     </div>
-    </div>
-    </div>
+  </div>
   )
 }
 
-export default UserDetailsPage
-
-
-
+export default Account
